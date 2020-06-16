@@ -3,7 +3,7 @@ function Ticket(movie, age, matinee) {
   this.movie = movie;
   this.age = age;
   this.matinee = matinee;
-};
+}
 
 Ticket.prototype.senior = function(){
   if (this.age >= 65) {
@@ -30,32 +30,34 @@ Ticket.prototype.isNewMovie = function() {
 };
 
 Ticket.prototype.price = function() {
-  let start = 10 //start price of ticket
+  let start = 10;
   
   if (this.isNewMovie() === true) {
-    start = start + 5
+    start = start + 5;
   } else {
-    start = start - 5
+    start = start - 5;
   }
   
   if (this.senior() === true) {
-    start = start - 2
+    start = start - 2;
   }
 
   if (this.isMatinee() === true) {
-    start = start - 2
+    start = start - 2;
   }
-  return start
+  return start;
 };
 
-// Select NAME of movie
-// Time of Day
-// Age
-// Price of movie based on 3
-
+//user
 $(document).ready(function() {
 $("form").submit(function (event) {
-  
+  let movie = $("#movieInput").val(); 
+  let age = $("#ageInput").val();
+  let time = $("#timeInput").val();
+  let finalTicket = new Ticket(movie, age, time);
+  let finalPrice = finalTicket.price();
+  $(".btn-info").text("Your movie ticket price is $ " + finalTicket.price() + ".00");
+  console.log(finalPrice);
   event.preventDefault();
-}
-}
+});
+});
